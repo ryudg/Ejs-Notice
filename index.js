@@ -41,6 +41,17 @@ app.post("/create", (req, res) => {
   res.redirect("/");
 });
 
+// 글삭제 요청 /delete
+app.post("/delete/:id", (req, res) => {
+  // id 번호
+  const id = req.params.id;
+  console.log(id);
+  // id값에 해당하는 posts 삭제
+  posts.splice(id, 1);
+  fs.writeFileSync("postDB.json", JSON.stringify(posts));
+  res.redirect("/");
+});
+
 const port = 3001;
 app.listen(port, () => {
   console.log(`server running at ${port}`);
